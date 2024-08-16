@@ -6,22 +6,6 @@ const port = 5000;
 
 app.use(express.json());
 
-// Create a new user
-app.post('/users', async (req, res) => {
-  const { name, email } = req.body;
-  try {
-    const newUser = await prisma.user.create({
-      data: {
-        name,
-        email,
-      },
-    });
-    res.json(newUser);
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to create user' });
-  }
-});
-
 // Get all users
 app.get('/users', async (req, res) => {
   try {
@@ -46,6 +30,22 @@ app.get('/users/:id', async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch user' });
+  }
+});
+
+// Create a new user
+app.post('/users', async (req, res) => {
+  const { name, email } = req.body;
+  try {
+    const newUser = await prisma.user.create({
+      data: {
+        name,
+        email,
+      },
+    });
+    res.json(newUser);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to create user' });
   }
 });
 
