@@ -17,13 +17,4 @@ model User {
   id    String  @id @default(auto()) @map("_id") @db.ObjectId
   name  String
   email String @unique
-  posts Post[]
-}
-
-model Post {
-  id       String  @id @default(auto()) @map("_id") @db.ObjectId
-  title    String
-  content  String?
-  authorId String
-  author   User    @relation(fields: [authorId], references: [id])
 }
